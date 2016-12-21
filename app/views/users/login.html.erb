@@ -1,0 +1,29 @@
+<div class="row vertical-center">
+  <div class="col-md-4 col-md-offset-4 login-bg">
+    <%= simple_form_for :login, :url => "/sing_up", html: { class: "col-md-12"}, defaults: { input_html: { class: 'form-control' } } do |f| %>
+      <div class="row">
+        <%= f.input :email, label: "Email", :wrapper_html => { :class => 'col-md-12' } %>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <%= f.input :password, label: "Senha", :wrapper_html => { :class => 'col-md-12' } %>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="btn-group btn-group-lg col-md-12">
+          <%= f.button :submit, "Entrar", :class => 'btn  btn-success col-md-12' %>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <%= link_to "Não possui uma conta?", new_user_path, :class => "pull-right" %>
+      </div>
+    <% end %>
+  </div>
+</div>

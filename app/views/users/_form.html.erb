@@ -1,0 +1,32 @@
+<div class="row vertical-center">
+  <div class="col-md-4 col-md-offset-4 login-bg">
+    <h3><%= action %></h3>
+
+    <%= simple_form_for @user, html: { class: "col-md-12"}, defaults: { input_html: { class: 'form-control' } } do |f| %>
+      <div class="row">
+        <%= f.error_notification %>
+      </div>
+
+      <div class="row">
+        <%= f.input :name, label: "Nome", :wrapper_html => { :class => 'form-group col-md-12' } %>
+      </div>
+
+      <div class="row">
+        <%= f.input :email, label: "Email", :wrapper_html => { :class => 'form-group col-md-12' } %>
+      </div>
+
+      <div class="row">
+        <%= f.input :password, label: "Senha", :wrapper_html => { :class => 'form-group col-md-12' } %>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="btn-group btn-group-lg col-md-12">
+          <%= f.button :submit, "Salvar", :class => 'btn  btn-success col-md-12' %>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+</div>
