@@ -1,0 +1,18 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: user
+  password: DBAlphaPS2016
+  host: localhost
+  database: amigox
+  socket: /tmp/mysqld.sock
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

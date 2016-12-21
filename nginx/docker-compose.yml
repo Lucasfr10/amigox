@@ -1,0 +1,6 @@
+nginx:
+  build: .
+  volumes:
+    - /tmp:/tmp
+  ports:
+    - 80:80
