@@ -1,5 +1,10 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :raffle]
+
+  def raffle
+    @group.raffle()
+    redirect_to group_path(@group)
+  end
 
   # GET /groups
   # GET /groups.json

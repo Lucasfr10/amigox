@@ -12,20 +12,17 @@
   </div>
   <div class="row">
     <% @user.groups.each do |group| %>
-      <div class="row show_group col-md-12">
-        <a href="<%= "/groups/" + group.id.to_s %>">
-          <label class="col-md-12">
-            <div class="col-md-6">
-              <h4>
-                <%= group.name %>
-              </h4>
-            </div>
-            <div class="col-md-6">
-              <h5>Não sorteado</h5>
-            </div>
-          </label>
-        </a>
-      </div>
+      <% if group.raffled %>
+        <%= render :partial => 'raffled_group', :locals => {:group => group, :pair => group.user_groups.where(:user_id => @user.id).take.pair} %>
+      <% else %>
+        <%= render :partial => 'no_raffled_group', :locals => {:group => group} %>
+      <% end %>
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#my_profile").addClass("active");
+  });
+</script>

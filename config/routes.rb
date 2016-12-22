@@ -5,4 +5,7 @@ Rails.application.routes.draw do
 
   get '/login' => 'users#login'
   post '/sing_up' => 'users#sing_up'
+  get '/logout' => 'users#logout'
+
+  get '/sortear/:id' => "groups#raffle"
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_action :login_verify, only: [:new, :login, :sing_up]
-  
+
   layout 'layouts/login_layout', :only => [:login, :new]
 
   def login
@@ -14,6 +14,12 @@ class UsersController < ApplicationController
     session[:logged] = user
 
     redirect_to "/users/#{user.id}"
+  end
+
+  def logout
+    session[:logged] = nil
+
+    redirect_to "/login"
   end
 
   # GET /users
