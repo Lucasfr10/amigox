@@ -1,59 +1,75 @@
-<h3><%= action %></h3>
 
 <% @users = User.all %>
 
 <%= simple_form_for @group, html: { class: "col-md-12"}, defaults: { input_html: { class: 'form-control' } } do |f| %>
-  <%= f.error_notification %>
-
-  <div class="row">
-    <div class="col-md-4">
-      <%= f.input :name %>
+  <div class="row col-md-12 text-center header-bg">
+    <div class="row">
+      <%= f.error_notification %>
     </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="">&nbsp;</label>
-        <div class="btn-group btn-group-md col-md-12">
-          <%= f.button :submit, "Salvar", class: "col-md-8" %>
-          <%= link_to "Cancelar", back_to, class: "btn btn-default col-md-4" %>
+
+    <div class="row">
+      <h3><%= action %></h3>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :name, :wrapper_html => {:class => "text-left"} %>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+
+          <label for="">&nbsp;</label>
+          <div class="col-md-12">
+            <%= f.button :submit, "Salvar", class: "col-md-7" %>
+            <%= link_to "Cancelar", back_to, class: "btn btn-default col-md-4 col-md-offset-1 pull-right" %>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row">
-
-
-  </div>
-
   <input type="hidden" id="user_ids" name="group[user_ids][]" value>
 
-  <div class="row">
-    <div class="col-md-6">
+  <div class="row col-md-12">
+    <div class="col-md-5 text-center users-bg">
       <div class="row">
         <h4>Usuarios: <small>clique para adicionar</small></h4>
       </div>
-      <div class="row" id="users">
+
+      <input type="text" name="name" class="form-control col-md-12" placeholder="Pesquise um usuario aqui." onKeyUp="search_user(this.value)" value="">
+
+      <br>
+      <br>
+
+      <div class="row user-list" id="users">
         <% @users.each do |user| %>
-          <div id="<%= "user_div_" + user.id.to_s %>" class="row select_user col-md-12">
-            <input type="checkbox" class="checkbox" name="user" onChange="select_user(this)" id="<%= "user_" + user.id.to_s %>" value="<%= user.id %>">
+          <div id="<%= "user_div_" + user.id.to_s %>" name="user" class="row select_user col-md-12">
+
+            <input type="checkbox" class="checkbox" name="user_checkbox" onChange="select_user(this)" id="<%= "user_" + user.id.to_s %>" value="<%= user.id %>">
             <label class="col-md-12" for="<%= "user_" + user.id.to_s %>">
               <h5>
-                <%= user.name %>
+                <span id="name"><%= user.name %></span>
                 <br>
-                <small>
+                <small id="email">
                   <%= user.email %>
                 </small>
               </h5>
             </label>
+
           </div>
         <% end %>
       </div>
+
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5 col-md-offset-2 text-center users-bg">
       <div class="row">
         <h4>Usuarios selecionados: <small>clique para remover</small></h4>
       </div>
-      <div class="row" id="selected_users">
+
+      <br>
+      
+      <div class="row user-list" id="selected_users">
 
       </div>
     </div>

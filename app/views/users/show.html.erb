@@ -1,24 +1,26 @@
-<div class="row">
-  <h3><%= @user.name %> <small><%= @user.email %></small></h3>
-</div>
-<div class="row">
-  <div class="row">
+<div class="row col-md-12 text-center header-bg">
+  <div class="col-md-12">
+    <h3><%= @user.name %> <small><%= @user.email %></small></h3>
+  </div>
+
+  <div class="col-md-12">
     <h4>
-      Grupos que você participa:
+      Grupos em que você participa:
       <small>
         <%= link_to "Criar grupo", new_group_path, :class => "btn btn-info" %>
       </small>
     </h4>
   </div>
-  <div class="row">
-    <% @user.groups.each do |group| %>
-      <% if group.raffled %>
-        <%= render :partial => 'raffled_group', :locals => {:group => group, :pair => group.user_groups.where(:user_id => @user.id).take.pair} %>
-      <% else %>
-        <%= render :partial => 'no_raffled_group', :locals => {:group => group} %>
-      <% end %>
+</div>
+
+<div class="row">
+  <% @user.groups.each do |group| %>
+    <% if group.raffled %>
+      <%= render :partial => 'raffled_group', :locals => {:group => group, :pair => group.user_groups.where(:user_id => @user.id).take.pair} %>
+    <% else %>
+      <%= render :partial => 'no_raffled_group', :locals => {:group => group} %>
     <% end %>
-  </div>
+  <% end %>
 </div>
 
 <script type="text/javascript">

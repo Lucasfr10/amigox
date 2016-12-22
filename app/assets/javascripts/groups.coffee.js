@@ -47,7 +47,22 @@ function select_user(user) {
     }
   }
 
-  console.log(user_ids);
+  $("#user_ids").val(jQuery.unique(user_ids));
+}
 
-  $("#user_ids").val(user_ids);
+function search_user(value) {
+  value = value.toLowerCase();
+
+  var users = $("#users").children("[name=user]");
+
+  for (var i = 0; i < users.length; i++) {
+    $(users[i]).hide();
+
+    var name = $($(users[i]).find("#name")[0]).html().toLowerCase();
+    var email = $($(users[i]).find("#email")[0]).html().toLowerCase();
+
+    if (name.includes(value) || email.includes(value)) {
+      $(users[i]).show();
+    }
+  }
 }
