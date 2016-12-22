@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221193648) do
+ActiveRecord::Schema.define(version: 20161222122536) do
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
+
+  create_table "user_groups", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "group_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "pair_id",    limit: 4
+  end
+
+  add_index "user_groups", ["group_id"], name: "index_user_groups_on_group_id", using: :btree
+  add_index "user_groups", ["pair_id"], name: "index_user_groups_on_pair_id", using: :btree
+  add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -21,4 +42,8 @@ ActiveRecord::Schema.define(version: 20161221193648) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "groups", "users"
+  add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "users"
+  add_foreign_key "user_groups", "users", column: "pair_id"
 end

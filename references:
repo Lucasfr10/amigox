@@ -1,0 +1,3 @@
+Expected string default value for '--jbuilder'; got true (boolean)
+[1m[37m      invoke[0m  active_record
+[1m[31m      remove[0m    db/migrate/20161222121508_add_pair_to_user_groups.rb

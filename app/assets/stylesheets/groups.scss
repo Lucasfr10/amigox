@@ -1,0 +1,53 @@
+// Place all the styles related to the groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.select_user , .select_user label, .select_user input[type=checkbox] {
+  cursor: pointer;
+}
+
+.select_user input[type=checkbox]{
+  float: left;
+}
+
+.select_user div {
+	clear: both;
+	margin: 0;
+}
+
+.select_user label {
+  color: #000;
+  font-weight: normal;
+  text-align: center;
+  // border-radius: 3px;
+  border-bottom: 1px solid #D1D3D4;
+  margin: 0;
+}
+
+/* hide input */
+.select_user input.checkbox:empty {
+	margin-left: -4000px;
+}
+
+/* style label */
+.select_user input.checkbox:empty ~ label {
+	position: relative;
+	float: left;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.select_user input.checkbox:hover:not(:checked) ~ label {
+	color: #888;
+}
+
+.select_user input.checkbox:checked ~ label {
+	color: #777;
+}
+
+.select_user{
+  display: block;
+}

@@ -1,19 +1,31 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="row">
+  <h3><%= @user.name %> <small><%= @user.email %></small></h3>
+</div>
+<div class="row">
+  <div class="row">
+    <h4>
+      Grupos que você participa:
+      <small>
+        <%= link_to "Criar grupo", new_group_path, :class => "btn btn-info" %>
+      </small>
+    </h4>
+  </div>
+  <div class="row">
+    <% @user.groups.each do |group| %>
+      <div class="row show_group col-md-12">
+        <a href="<%= "/groups/" + group.id.to_s %>">
+          <label class="col-md-12">
+            <div class="col-md-6">
+              <h4>
+                <%= group.name %>
+              </h4>
+            </div>
+            <div class="col-md-6">
+              <h5>Não sorteado</h5>
+            </div>
+          </label>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</div>

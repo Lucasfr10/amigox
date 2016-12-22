@@ -1,0 +1,62 @@
+<h3><%= action %></h3>
+
+<% @users = User.all %>
+
+<%= simple_form_for @group, html: { class: "col-md-12"}, defaults: { input_html: { class: 'form-control' } } do |f| %>
+  <%= f.error_notification %>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :name %>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="">&nbsp;</label>
+        <div class="btn-group btn-group-md col-md-12">
+          <%= f.button :submit, "Salvar", class: "col-md-8" %>
+          <%= link_to "Cancelar", back_to, class: "btn btn-default col-md-4" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+
+  </div>
+
+  <input type="hidden" id="user_ids" name="group[user_ids][]" value>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <h4>Usuarios: <small>clique para adicionar</small></h4>
+      </div>
+      <div class="row" id="users">
+        <% @users.each do |user| %>
+          <div id="<%= "user_div_" + user.id.to_s %>" class="row select_user col-md-12">
+            <input type="checkbox" class="checkbox" name="user" onChange="select_user(this)" id="<%= "user_" + user.id.to_s %>" value="<%= user.id %>">
+            <label class="col-md-12" for="<%= "user_" + user.id.to_s %>">
+              <h5>
+                <%= user.name %>
+                <br>
+                <small>
+                  <%= user.email %>
+                </small>
+              </h5>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <h4>Usuarios selecionados: <small>clique para remover</small></h4>
+      </div>
+      <div class="row" id="selected_users">
+
+      </div>
+    </div>
+  </div>
+
+<% end %>

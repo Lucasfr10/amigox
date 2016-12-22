@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-8">
+    <h3>
+      <%= @group.name %>
+      <% if @group.user_id == session[:logged]["id"] %>
+        <%= link_to image_tag("/assets/icon-edit.png"), edit_group_path(@group) %>
+      <% end %>
+      <br>
+
+      <small>
+        Administrador: <%= @group.user.name %>
+      </small>
+    </h3>
+  </div>
+  <div class="col-md-4">
+    <% if @group.user_id == session[:logged]["id"] %>
+      <% if @group.users.count.even? %>
+        <div class="btn-group btn-group-lg col-md-12">
+          <%= link_to "Sortear", "/sortear/#{@group.id}", class: "btn btn-success pull-right" %>
+        </div>
+      <% else %>
+        <h5 class="text-center text-danger">Por favor, adicione um número par de participantes.</h5>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="row">
+    <h4>Participantes: <span class="badge"><%= @group.users.count %></span></h4>
+  </div>
+  <div class="row">
+    <% @group.users.each do |user| %>
+      <div class="row show_users col-md-12">
+        <label class="col-md-12">
+          <h5>
+            <%= user.name %>
+            <br>
+            <small>
+              <%= user.email %>
+            </small>
+          </h5>
+        </label>
+      </div>
+    <% end %>
+   </div>
+</div>

@@ -1,0 +1,7 @@
+<%= render :partial => 'form', :locals => {:action => "editar grupo", :back_to => group_path(@group)} %>
+
+<%= javascript_tag do %>
+  $(document).ready(function () {
+    load_users('<%= raw(@select_user.to_json) %>');
+  });
+<% end %>
