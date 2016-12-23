@@ -27,14 +27,18 @@
       </div>
       <div class="col-md-4">
         <br>
-        <% if !@group.raffled %>
-          <% if @group.users.count.even? %>
-            <%= link_to "Sortear", "/sortear/#{@group.id}", class: "btn btn-success btn-lg pull-right" %>
+        <% if @group.all_accepts %>
+          <% if !@group.raffled %>
+            <% if @group.users.count.even? %>
+              <%= link_to "Sortear", "/sortear/#{@group.id}", class: "btn btn-success btn-lg pull-right" %>
+            <% else %>
+              <h5 class="text-center text-danger">Por favor, adicione um número par de participantes.</h5>
+            <% end %>
           <% else %>
-            <h5 class="text-center text-danger">Por favor, adicione um número par de participantes.</h5>
+            <h5 class="text-center text-success">O sorteio já foi realizado</h5>
           <% end %>
         <% else %>
-          <h5 class="text-center text-success">O sorteio já foi realizado</h5>
+          <h5 class="text-center text-danger">Todos os participantes devem aceitar o convite.</h5>
         <% end %>
       </div>
     <% end %>

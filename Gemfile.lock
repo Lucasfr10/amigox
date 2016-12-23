@@ -185,6 +185,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
+    ruby_http_client (3.0.0)
     rubyzip (1.2.0)
     rufus-scheduler (3.3.1)
       tzinfo
@@ -199,6 +200,10 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    sendgrid (1.2.4)
+      json
+    sendgrid-ruby (4.0.6)
+      ruby_http_client (~> 3.0.0)
     simple_form (3.3.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -266,6 +271,8 @@ DEPENDENCIES
   rufus-scheduler
   sass-rails (~> 5.0)
   selenium-webdriver
+  sendgrid
+  sendgrid-ruby
   simple_form
   spring
   spring-commands-rspec

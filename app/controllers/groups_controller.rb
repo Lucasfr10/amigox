@@ -6,6 +6,18 @@ class GroupsController < ApplicationController
     redirect_to group_path(@group)
   end
 
+  def accept_invite
+    group = Group.find(params[:group_id])
+    group.accept_invite(params[:user_id])
+    redirect_to group_path(group)
+  end
+
+  def recuse_invite
+    group = Group.find(params[:group_id])
+    group.recuse_invite(params[:user_id])
+    redirect_to group_path(group)
+  end
+
   # GET /groups
   # GET /groups.json
   def index
