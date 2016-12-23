@@ -1,0 +1,41 @@
+<div class="row col-md-12 text-center header-bg">
+  <div class="row header-height">
+    <div class="col-md-8">
+      <h3>
+        <%= @event.name %>
+
+        <%= if @event.group.user_id == session[:logged]["id"] then link_to(image_tag("/assets/icon-edit.png"), edit_event_path(@event)) end %>
+        <br>
+
+        <small>
+          Grupo: <%= @event.group.name %>
+        </small>
+      </h3>
+    </div>
+    <div class="col-md-4">
+      <br>
+      <%= link_to "Voltar", group_path(@event.group), class: "btn btn-info btn-lg" %>
+    </div>
+  </div>
+
+  <div class="row content-height">
+    <div class="col-md-8 col-md-offset-2 show_lists">
+      <h4>Pares: <span class="badge"><%= @event.users.count %></span></h4>
+      <% @event.users.each do |user| %>
+        <div class="row">
+
+          <div class="col-md-6">
+            <%= render :partial => 'user', :locals => {:user => user} %>
+          </div>
+
+          <% if user.pair(@event) != nil %>
+          <div class="col-md-6">
+            <%= render :partial => 'user', :locals => {:user => user.pair(@event)} %>
+          </div>
+          <% end %>
+
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

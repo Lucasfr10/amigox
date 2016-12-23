@@ -1,0 +1,7 @@
+<%= render :partial => 'form', :locals => {:action => "Editar evento #{@event.name}", :back_to => event_path(@event)} %>
+
+<%= javascript_tag do %>
+  $(document).ready(function () {
+    load_users('<%= raw(@select_user.to_json) %>');
+  });
+<% end %>

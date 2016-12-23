@@ -1,5 +1,16 @@
 var user_ids = [];
 
+function verify_even_users(){
+  if(user_ids.length > 0 && user_ids.length % 2 == 0){
+    $("#save_event").prop( "disabled", false );
+    $("#save_event_label").html("&nbsp;");
+  }
+  else {
+    $("#save_event").prop( "disabled", true );
+    $("#save_event_label").html("Necessário um número par de participantes.")
+  }
+}
+
 function load_users(selected_users_json) {
   var selected_users = JSON.parse(selected_users_json);
 
@@ -46,6 +57,8 @@ function select_user(user) {
       user_ids.splice(index, 1);
     }
   }
+
+  verify_even_users();
 
   $("#user_ids").val(jQuery.unique(user_ids));
 }

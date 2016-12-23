@@ -1,5 +1,5 @@
 <div class="row col-md-12 text-center header-bg">
-  <div class="row">
+  <div class="row header-height">
     <% if @group.user_id != session[:logged]["id"] %>
       <div class="col-md-12">
         <h3>
@@ -27,34 +27,33 @@
       </div>
       <div class="col-md-4">
         <br>
-        <% if @group.all_accepts %>
-          <% if !@group.raffled %>
-            <% if @group.users.count.even? %>
-              <%= link_to "Sortear", "/sortear/#{@group.id}", class: "btn btn-success btn-lg pull-right" %>
-            <% else %>
-              <h5 class="text-center text-danger">Por favor, adicione um número par de participantes.</h5>
-            <% end %>
-          <% else %>
-            <h5 class="text-center text-success">O sorteio já foi realizado</h5>
-          <% end %>
-        <% else %>
-          <h5 class="text-center text-danger">Todos os participantes devem aceitar o convite.</h5>
-        <% end %>
+        <%= link_to "Criar evento", new_event_path, class: "btn btn-success btn-lg" %>
+        <%= link_to "Voltar", user_path(session[:logged]["id"]), class: "btn btn-info btn-lg" %>
       </div>
     <% end %>
   </div>
 
-  <div class="row">
-    <h4>Participantes: <span class="badge"><%= @group.users.count %></span></h4>
+  <div class="row content-height">
+    <div class="col-md-6 max_height">
+      <h4>Participantes: <span class="badge"><%= @group.users.count %></span></h4>
+
+      <div class="show_lists">
+        <% @group.users.each do |user| %>
+          <%= render :partial => 'user', :locals => {:user => user} %>
+        <% end %>
+      </div>
+
+    </div>
+
+    <div class="col-md-6 max_height">
+      <h4>Eventos: <span class="badge"><%= @group.events.count %></span></h4>
+
+      <div class="show_lists">
+        <% @group.events.each do |event| %>
+          <%= render :partial => 'event', :locals => {:event => event} %>
+        <% end %>
+      </div>
+
+    </div>
   </div>
 </div>
-
-<div class="row">
-  <% @group.users.each do |user| %>
-    <% if @group.raffled %>
-      <%= render :partial => 'raffled_user', :locals => {:user => user, :pair => @group.user_groups.where(:user_id => user.id).take.pair} %>
-    <% else %>
-      <%= render :partial => 'no_raffled_user', :locals => {:user => user} %>
-    <% end %>
-  <% end %>
- </div>

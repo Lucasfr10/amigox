@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,8 +25,8 @@
 
       </div>
       <div class="row">
-        <%= link_to "Aceitar", "/accept_invite/#{@user.id}/#{@group.id}", :class => "btn btn-success" %>
-        <%= link_to "Recusar", "/recuse_invite/#{@user.id}/#{@group.id}", :class => "btn btn-warning" %>
+        <%= link_to "Aceitar", root_url+"accept_invite/#{@user.id}/#{@group.id}", :class => "btn btn-success" %>
+        <%= link_to "Recusar", root_url+"recuse_invite/#{@user.id}/#{@group.id}", :class => "btn btn-warning" %>
       </div>
     </div>
   </body>

@@ -1,11 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy, :raffle]
 
-  def raffle
-    @group.raffle()
-    redirect_to group_path(@group)
-  end
-
   def accept_invite
     group = Group.find(params[:group_id])
     group.accept_invite(params[:user_id])
@@ -27,17 +22,20 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
+    session[:current_group] = @group
   end
 
   # GET /groups/new
   def new
     @group = Group.new
     @group.user_id = session[:logged]["id"]
+    @users = User.all
   end
 
   # GET /groups/1/edit
   def edit
     @select_user = @group.users
+    @users = User.all
   end
 
   # POST /groups
@@ -49,6 +47,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
+        @group.send_invite
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
@@ -63,6 +62,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
+        @group.send_invite
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
