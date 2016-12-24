@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223163812) do
+ActiveRecord::Schema.define(version: 20161224173547) do
+
+  create_table "chats", force: :cascade do |t|
+    t.text     "message",     limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "sender_id",   limit: 4
+    t.integer  "receiver_id", limit: 4
+  end
+
+  add_index "chats", ["receiver_id"], name: "index_chats_on_receiver_id", using: :btree
+  add_index "chats", ["sender_id"], name: "index_chats_on_sender_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -63,6 +74,8 @@ ActiveRecord::Schema.define(version: 20161223163812) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "chats", "users", column: "receiver_id"
+  add_foreign_key "chats", "users", column: "sender_id"
   add_foreign_key "events", "groups"
   add_foreign_key "groups", "users"
   add_foreign_key "user_events", "events"

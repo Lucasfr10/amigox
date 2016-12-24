@@ -7,15 +7,53 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="bg">
-  <div class="container" style="height: 100%">
-    <div class="row" style="height: 100%">
-      <div class="col-md-8 content">
+  <div class="container-fluid max_height">
+    <div class="row max_height">
+      <div class="col-md-7 col-md-offset-1 content">
         <%= yield %>
       </div>
-      <div class="col-md-4">
-        CHAT
+      <div class="col-md-4 chat-bg max_height nopadding">
+        <div class="col-md-6 chat-users-bg">
+          <% @chat_users.each do |user| %>
+            <div name="chat-user" onClick="<%= "select_chat_user(#{user.id.to_s })" %>" id="<%= "chat_user_" + user.id.to_s %>" class="row chat-show-users">
+              <label class="col-md-12">
+                <h5>
+                  <span id="name"><%= user.name %></span>
+                  <br>
+                  <small id="email">
+                    <%= user.email %>
+                  </small>
+                </h5>
+              </label>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-6 nopadding chat-msg-bg">
+          <% @chat_users.each do |user| %>
+            <div name="chat_messages" id="<%= "chat_user_messages_" + user.id.to_s %>" style="display: none" class="container-fluid chat-messages">
+              <br>
+            </div>
+          <% end %>
+          <div class="container-fluid chat-input">
+            <div class="row">
+              <textarea id="chat_input_message" class="form-control col-md-12" rows="3"></textarea>
+            </div>
+            <div class="row">
+              <button type="button" onClick="send_message();" class="btn btn-success btn-sm col-md-12">
+                Enviar
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <%= javascript_tag do %>
+    $(document).ready(function () {
+      get_user('<%= raw(session[:logged]["id"].to_json) %>');
+      
+      setInterval(function(){ get_messages() }, 500);
+    });
+  <% end %>
 </body>
 </html>

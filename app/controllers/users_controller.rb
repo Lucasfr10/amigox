@@ -1,8 +1,22 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :get_messages]
   skip_before_action :login_verify, only: [:new, :login, :sing_up]
 
   layout 'layouts/login_layout', :only => [:login, :new]
+
+  def send_message
+    response = Chat.send_message(params[:chat][:sender_id], params[:chat][:receiver_id], params[:chat][:message])
+
+    respond_to do |format|
+      format.json { render :json => response }
+    end
+  end
+
+  def get_messages
+    respond_to do |format|
+      format.json { render :json => @user.get_messages }
+    end
+  end
 
   def login
     render "users/login"
