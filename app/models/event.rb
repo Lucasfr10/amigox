@@ -11,6 +11,9 @@ class Event < ActiveRecord::Base
     pairs.each do |pair|
       self.user_events.where(:user_id => pair[0].id).take.update(:pair => pair[1])
       self.user_events.where(:user_id => pair[1].id).take.update(:pair => pair[0])
+
+      EventNotification.send_email(pair[0], self).deliver
+      EventNotification.send_email(pair[1], self).deliver
     end
 
     self.update(:raffled => true)

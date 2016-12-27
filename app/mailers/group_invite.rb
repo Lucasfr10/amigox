@@ -2,7 +2,7 @@ class GroupInvite < ApplicationMailer
   include SendGrid
   default from: "convites@amigox.com"
 
-  def sample_email(user, group)
+  def send_email(user, group)
     @user = user
     @group = group
 

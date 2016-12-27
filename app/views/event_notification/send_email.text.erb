@@ -1,0 +1,3 @@
+Olá <%= @user.name %>, O grupo "<%= @event.group.name %>" tem um novo evento "<%= @event.name %>", seu par nesse evento é <%= @user.pair(@event).name %>.
+
+Para ver o evento completo acesse <%= event_url(@event) %>

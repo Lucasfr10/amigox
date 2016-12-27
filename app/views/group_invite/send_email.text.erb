@@ -1,0 +1,3 @@
+Olá <%= @user.name %>, você recebeu um convite para participar do grupo <%= @group.name %>.
+<%= "Para aceitar acesse #{root_url}accept_invite/#{@user.id}/#{@group.id}" %>
+<%= "ou acesse #{root_url}recuse_invite/#{@user.id}/#{@group.id} para recusar" %>

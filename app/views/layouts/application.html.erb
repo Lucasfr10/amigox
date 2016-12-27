@@ -28,7 +28,7 @@
             </div>
           <% end %>
         </div>
-        <div class="col-md-6 nopadding chat-msg-bg">
+        <div id="chat" class="col-md-6 nopadding chat-msg-bg">
           <% @chat_users.each do |user| %>
             <div name="chat_messages" id="<%= "chat_user_messages_" + user.id.to_s %>" style="display: none" class="container-fluid chat-messages">
               <br>
@@ -51,8 +51,8 @@
   <%= javascript_tag do %>
     $(document).ready(function () {
       get_user('<%= raw(session[:logged]["id"].to_json) %>');
-      
-      setInterval(function(){ get_messages() }, 500);
+
+      chat_refresh_intervalId = setInterval(function(){ get_messages() }, 500);
     });
   <% end %>
 </body>

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :get_messages]
-  skip_before_action :login_verify, only: [:new, :login, :sing_up]
+  skip_before_action :login_verify , only: [:new, :login, :sing_up, :create]
+  skip_before_action :chat_users , only: [:new, :login, :sing_up, :create]
 
   layout 'layouts/login_layout', :only => [:login, :new]
 
@@ -24,10 +25,13 @@ class UsersController < ApplicationController
 
   def sing_up
     user = User.login(params[:login][:email], params[:login][:password])
+    if user != nil
+      session[:logged] = user
 
-    session[:logged] = user
-
-    redirect_to "/users/#{user.id}"
+      redirect_to "/users/#{user.id}"
+    else
+      redirect_to "/login"
+    end
   end
 
   def logout
@@ -63,6 +67,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:logged] = @user
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else

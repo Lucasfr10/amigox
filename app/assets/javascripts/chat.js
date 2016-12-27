@@ -1,3 +1,4 @@
+var chat_refresh_intervalId;
 var chat_user_id;
 var reciver_id;
 var first_chat_load = true;
@@ -33,7 +34,9 @@ function send_message() {
 
 function get_messages(){
   $.get( "/get_messages/"+chat_user_id, function(data) {
-    load_messages(data);
+    if($("#chat").length){
+      load_messages(data);
+    }
     first_chat_load = false;
   });
 }

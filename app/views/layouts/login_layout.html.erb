@@ -10,5 +10,10 @@
   <div class="container">
     <%= yield %>
   </div>
+  <%= javascript_tag do %>
+    $(document).ready(function () {
+      clearInterval(chat_refresh_intervalId);
+    });
+  <% end %>
 </body>
 </html>

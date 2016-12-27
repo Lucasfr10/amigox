@@ -16,7 +16,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @group = Group.find(session[:current_group]["id"])
-    @users = @group.users.joins(:user_groups).where(:user_groups => {:invite_flag => true})
+    @users = @group.users.joins(:user_groups).where(:user_groups => {:invite_flag => false})
   end
 
   # GET /events/1/edit

@@ -8,7 +8,7 @@ class Group < ActiveRecord::Base
 
   def send_invite
     self.users.joins(:user_groups).where(:user_groups => {:invite_flag => false}).each do |user|
-      GroupInvite.sample_email(user, self).deliver
+      GroupInvite.send_email(user, self).deliver
     end
   end
 
