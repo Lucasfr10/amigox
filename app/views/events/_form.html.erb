@@ -73,3 +73,9 @@
   </div>
 
 <% end %>
+
+<%= javascript_tag do %>
+  $(document).ready(function () {
+    verify_even_users();
+  });
+<% end %>
