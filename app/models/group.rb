@@ -16,7 +16,7 @@ class Group < ActiveRecord::Base
     self.user_groups.where(:user_id => user_id).take.update(:invite_flag => true)
   end
 
-  def accept_invite(user_id)
+  def recuse_invite(user_id)
     self.user_groups.where(:user_id => user_id).take.update(:invite_flag => false)
   end
 

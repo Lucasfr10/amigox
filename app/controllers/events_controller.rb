@@ -15,14 +15,14 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @group = Group.find(session[:current_group]["id"])
-    @users = @group.users.joins(:user_groups).where(:user_groups => {:invite_flag => false})
+    @group = Group.find(params[:group_id])
+    @users = @group.users.joins(:user_groups).where(:user_groups => {:invite_flag => true}).distinct(:user_id)
   end
 
   # GET /events/1/edit
   def edit
-    @group = Group.find(session[:current_group]["id"])
-    @users = @group.users.joins(:user_groups).where(:user_groups => {:invite_flag => true})
+    @group = Group.find(@event.group_id)
+    @users = @group.users.joins(:user_groups).where(:user_groups => {:invite_flag => true}).distinct(:user_id)
     @select_user = @event.users
   end
 

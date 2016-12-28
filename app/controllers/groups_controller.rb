@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy, :raffle]
+  skip_before_action :login_verify , only: [:accept_invite, :recuse_invite]
 
   def accept_invite
     group = Group.find(params[:group_id])

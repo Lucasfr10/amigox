@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :events
-  resources :groups
-  resources :users
-  root "users#index"
+  resources :events, except: [:index, :destroy]
+  resources :groups, except: [:index, :destroy]
+  resources :users, except: [:index, :destroy]
+  root "users#login"
+
+  get '/events/new/:group_id' => 'events#new'
 
   get '/login' => 'users#login'
   post '/sing_up' => 'users#sing_up'

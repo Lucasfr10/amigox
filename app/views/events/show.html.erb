@@ -18,9 +18,12 @@
     </div>
   </div>
 
+  <div class="row">
+    <h4 class="col-md-12 text-center">Pares: <span class="badge"><%= @event.users.count %></span></h4>
+  </div>
+
   <div class="row content-height">
-    <div class="col-md-8 col-md-offset-2 show_lists">
-      <h4>Pares: <span class="badge"><%= @event.users.count %></span></h4>
+    <div class="col-md-10 col-md-offset-1 show_lists">
       <% @event.users.each do |user| %>
         <div class="row">
 

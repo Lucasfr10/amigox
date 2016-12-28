@@ -1,6 +1,9 @@
 <div class="row show_users col-md-12">
   <label class="col-md-12">
     <h5>
+      <% if !invite_flag %>
+        <img src="/assets/warning.png" class="invite_img" data-toggle="tooltip" data-placement="left" title="Esse usuario ainda não aceitou o convite para participar desse grupo." />
+      <% end %>
       <%= user.name %>
       <br>
       <small>

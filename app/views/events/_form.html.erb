@@ -1,4 +1,4 @@
-<%= simple_form_for @event, html: { class: "col-md-12"}, defaults: { input_html: { class: 'form-control' } } do |f| %>
+<%= simple_form_for @event, html: { class: "col-md-12 form_height"}, defaults: { input_html: { class: 'form-control' } } do |f| %>
   <div class="row col-md-12 text-center header-bg">
     <div class="row">
       <%= f.error_notification %>
@@ -17,7 +17,7 @@
 
           <label id="save_event_label" for="">&nbsp;</label>
           <div class="col-md-12">
-            <%= f.button :submit, "Salvar", class: "col-md-7", id: "save_event" %>
+            <%= f.button :submit, "Salvar", class: "col-md-7", id: "save_event", data: { :disable_with => "Por favor espere..." }%>
             <%= link_to "Cancelar", back_to, class: "btn btn-default col-md-4 col-md-offset-1 pull-right" %>
           </div>
 
@@ -28,8 +28,8 @@
 
   <input type="hidden" id="user_ids" name="event[user_ids][]" value>
 
-  <div class="row col-md-12">
-    <div class="col-md-5 text-center users-bg">
+  <div class="row col-md-12 max_height">
+    <div class="col-md-5 text-center users-bg max_height">
       <div class="row">
         <h4>Usuarios: <small>clique para adicionar</small></h4>
       </div>
@@ -43,7 +43,7 @@
         <% @users.each do |user| %>
           <div id="<%= "user_div_" + user.id.to_s %>" name="user" class="row select_user col-md-12">
 
-            <input type="checkbox" class="checkbox" name="user_checkbox" onChange="select_user(this)" id="<%= "user_" + user.id.to_s %>" value="<%= user.id %>">
+            <input type="checkbox" class="checkbox" name="user_checkbox" onChange="select_user(this.value)" id="<%= "user_" + user.id.to_s %>" value="<%= user.id %>">
             <label class="col-md-12" for="<%= "user_" + user.id.to_s %>">
               <h5>
                 <span id="name"><%= user.name %></span>

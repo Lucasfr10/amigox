@@ -17,7 +17,7 @@
 
           <label for="">&nbsp;</label>
           <div class="col-md-12">
-            <%= f.button :submit, "Salvar", class: "col-md-7" %>
+            <%= f.button :submit, "Salvar", class: "col-md-7", data: { :disable_with => "Por favor espere..." } %>
             <%= link_to "Cancelar", back_to, class: "btn btn-default col-md-4 col-md-offset-1 pull-right" %>
           </div>
 
@@ -43,7 +43,7 @@
         <% @users.each do |user| %>
           <div id="<%= "user_div_" + user.id.to_s %>" name="user" class="row select_user col-md-12">
 
-            <input type="checkbox" class="checkbox" name="user_checkbox" onChange="select_user(this)" id="<%= "user_" + user.id.to_s %>" value="<%= user.id %>">
+            <input type="checkbox" class="checkbox" name="user_checkbox" onChange="select_user(this.value)" id="<%= "user_" + user.id.to_s %>" value="<%= user.id %>">
             <label class="col-md-12" for="<%= "user_" + user.id.to_s %>">
               <h5>
                 <span id="name"><%= user.name %></span>

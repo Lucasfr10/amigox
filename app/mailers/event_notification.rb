@@ -1,6 +1,6 @@
 class EventNotification < ApplicationMailer
   include SendGrid
-  default from: "convites@amigox.com"
+  default from: "eventos@amigox.com"
 
   def send_email(user, event)
     @user = user

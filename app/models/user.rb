@@ -22,6 +22,11 @@ class User < ActiveRecord::Base
     user.pair
   end
 
+  def invite_flag(group)
+    user = group.user_groups.where(:user_id => self.id).take
+    user.invite_flag
+  end
+
   def get_messages
     masseges = self.sent + self.received
 

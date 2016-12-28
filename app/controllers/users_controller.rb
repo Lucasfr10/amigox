@@ -20,7 +20,11 @@ class UsersController < ApplicationController
   end
 
   def login
-    render "users/login"
+    if session[:logged] != nil
+      redirect_to "/users/#{session[:logged]["id"]}"
+    else
+      render "users/login"
+    end
   end
 
   def sing_up
